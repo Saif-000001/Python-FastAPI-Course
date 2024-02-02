@@ -17,3 +17,17 @@
 # CI/CD
 # FastApi
 # SQLAlchemy
+
+
+# FastApi
+install -> pip install "fastapi[all]"
+-> pip freeze 
+ 
+# Create and activate the virtual environment:
+install ---> python3 -m venv venv
+---> source venv/bin/activate
+
+# FastApi Run 
+-> uvicorn main:app --reload
+
+
