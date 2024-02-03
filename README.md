@@ -148,3 +148,11 @@ This specific regular expression pattern checks that the received parameter valu
                 2. max_length
                 3. pattern
 
+# Path Parameters and Numeric Validations
+With Query, Path (and others you haven't seen yet) you can declare metadata and string validations in the same ways as with Query Parameters and String Validations.
+
+        And you can also declare numeric validations:
+                1. gt: greater than
+                2. ge: greater than or equal
+                3. lt: less than
+                4. le: less than or equal
