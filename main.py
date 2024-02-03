@@ -77,7 +77,7 @@ def requiredQueryParameters(items_id : str, price : int):
     items = {'items_id': items_id, 'price': price}
     return items """
 
-# Request Body
+""" # Request Body
 from fastapi import FastAPI
 from pydantic import BaseModel
 
@@ -103,9 +103,9 @@ def create_data(user:User):
         user_dict.update({'price_with_tax': price_with_tax})
     return user_dict
 
-""" @app.put('/users/{user_id}')
+@app.put('/users/{user_id}')
 def update_data(user_id: int, user:User):
-    return {'user_id':user_id, **user.dict()} """
+    return {'user_id':user_id, **user.dict()} 
 
 # Request body + path + query parameters
 @app.put('/users/{user_id}')
@@ -114,4 +114,47 @@ def update_data(user_id:int, user:User, p:str | None = None):
     if p:
         result.update({'p': p})
     return result
+ """
 
+# Query Parameters and String Validations
+
+""" from typing import Annotated, Union
+from fastapi import FastAPI, Query
+
+app = FastAPI()
+
+@app.get('/items/')
+# def read_item(q: Annotated[str | None, Query(max_length=50)]=None):
+# def read_item(q: str | None = Query(default=None,max_length=50)):
+# def read_items(
+#    q: Annotated[str|None, Query(min_length=3, max_length=50, pattern="^fixdeqeue$")
+#    ]=None
+# ):
+# def read_items(q: Annotated[str, Query(min_length=3)] = "fixedquery"):
+#     result ={ "items": [{"item_id":"foo"}, {"item_id":"bar"}]}
+#     if q:
+#         result.update({"q":q})
+#     return result
+
+# def read_item(q: Annotated[Union[list[str], None], Query()]=None):
+#     query_item = {"q":q}
+#     return query_item
+
+def read_items(
+    q: Annotated[
+        Union[str, None],
+        Query(
+            alias="item-query",
+            title="Query string",
+            description="Query string for the items to search in the database that have a good match",
+            min_length=3,
+            max_length=50,
+            pattern="^fixedquery$",
+            deprecated=True,
+        ),
+    ] = None,
+):
+    results = {"items": [{"item_id": "Foo"}, {"item_id": "Bar"}]}
+    if q:
+        results.update({"q": q})
+    return results """

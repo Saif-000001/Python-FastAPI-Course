@@ -115,3 +115,37 @@ When you declare other function parameters that are not part of the path paramet
         
 <!-- FastAPI will know that the value of q is not required because of the default  value = None.
  -->
+
+ # Query Parameters and String Validations
+<!-- Import Query and Annotated
+       1. Query from fastapi
+       2. Annotated from typing (or from typing_extensions in Python below 3.9)
+ -->
+ 
+<!-- 
+This specific regular expression pattern checks that the received parameter value:
+        1. ^: starts with the following characters, doesn't have characters before.
+        2. fixedquery: has the exact value fixedquery.
+        3. $: ends there, doesn't have any more characters after fixedquery.
+ -->
+
+ <!--
+        FastAPI will now:
+
+        1. Validate the data making sure that the max length is 50 characters
+        2. Show a clear error for the client when the data is not valid
+        3. Document the parameter in the OpenAPI schema path operation (so it will show up in the automatic docs UI) 
+  -->
+
+  <!--
+        Generic validations and metadata:
+                1. alias
+                2. title
+                3. description
+                4. deprecated
+        Validations specific for strings:
+                1. min_length
+                2. max_length
+                3. pattern
+
+   -->
