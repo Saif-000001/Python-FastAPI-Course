@@ -1,5 +1,5 @@
-from fastapi import FastAPI
-from enum import Enum
+# from fastapi import FastAPI
+# from enum import Enum
 
 # class ModelName(str, Enum):
 #     pujaCherry = 'pujaCherry'
@@ -7,7 +7,7 @@ from enum import Enum
 #     purnima = 'purnima'
 #     shabnur = "shabnur"
 
-app = FastAPI()
+# app = FastAPI()
 
 """ 
 @app.get('/models/{model_name}')
@@ -35,9 +35,9 @@ def select_model(model_name:ModelName):
 
     
 
-@app.get('/')
+""" @app.get('/')
 def read():
-    return {"message": "Hello World"}
+    return {"message": "Hello World"} """
 
 # Path parameters with types
 """ 
@@ -72,7 +72,46 @@ def check_quaryParameters(skip: int = 0, limit: int= 10):
 
 # Required query parameters
 # http://127.0.0.1:8000/items/mouse?price=500
-@app.get('/items/{items_id}')
+""" @app.get('/items/{items_id}')
 def requiredQueryParameters(items_id : str, price : int):
     items = {'items_id': items_id, 'price': price}
-    return items
+    return items """
+
+# Request Body
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+
+class User(BaseModel):
+    name : str
+    age : int | None = None
+    device : str 
+    price : int
+    tax :float
+
+app = FastAPI()
+
+@app.get('/')
+def show():
+    return f"Welcome to my site "
+
+@app.post('/users')
+def create_data(user:User):
+    user_dict = user.dict()
+    if user.tax:
+        price_with_tax = user.tax + user.price
+        user_dict.update({'price_with_tax': price_with_tax})
+    return user_dict
+
+""" @app.put('/users/{user_id}')
+def update_data(user_id: int, user:User):
+    return {'user_id':user_id, **user.dict()} """
+
+# Request body + path + query parameters
+@app.put('/users/{user_id}')
+def update_data(user_id:int, user:User, p:str | None = None):
+    result = {"user_id":user_id, **user.dict()}
+    if p:
+        result.update({'p': p})
+    return result
+

@@ -87,3 +87,31 @@ When you declare other function parameters that are not part of the path paramet
        2. skip, an int with a default value of 0.
        3. limit, an optional int.
 -->
+
+# Request Body
+<!--To declare a request body, I use Pydantic models with all their power and   benefits. 
+-->
+
+<!-- 
+        To send data, you should use one of: POST (the more common), PUT, DELETE or PATCH.
+ -->
+
+ # First, you need to import BaseModel from pydantic
+
+ # Pydantic
+ <!-- Dataclasses, TypedDicts -->
+
+ <!-- 
+ Pydantic provides four ways to create schemas and perform validation and serialization:
+
+       01. BaseModel — Pydantic's own super class with many common utilities available via instance methods.
+
+       02. pydantic.dataclasses.dataclass — a wrapper around standard dataclasses which performs validation when a dataclass is initialized.
+
+       03. TypeAdapter — a general way to adapt any type for validation and serialization. This allows types like TypedDict and NampedTuple to be validated as well as simple scalar values like int or timedelta — all types supported can be used with TypeAdapter.
+
+       04. validate_call — a decorator to perform validation when calling a function. 
+        -->
+        
+<!-- FastAPI will know that the value of q is not required because of the default  value = None.
+ -->
