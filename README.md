@@ -32,7 +32,7 @@ install ---> python3 -m venv venv
 --------------------------02-02-2024-------------------
 # create a path operation
 # HTTP Methods 
-<!--    POST: to create data.
+   POST: to create data.
         GET: to read data.
         PUT: to update data.
         DELETE: to delete data 
@@ -42,66 +42,66 @@ install ---> python3 -m venv venv
            # HEAD
            # PATCH
            # TRACE
--->
+
 
 # path operation function
-<!-- 
+
        # path: is /.
        # operation: is get.
        # function: is the function below the "decorator" (below @app.get("/"))
 
        Example: @app.get("/")
- -->
+ 
 
 # Recap
-<!-- 
+ 
     Import FastAPI.
     Create an app instance.
     Write a path operation decorator (like @app.get("/")).
     Write a path operation function (like def root(): ... above).
     Run the development server (like uvicorn main:app --reload). 
--->
+
 
 # You can only use await inside of functions created with async def.
 
 # Order matters
-<!-- if tow function is same pathe, fist function always show in documentation  -->
+ if tow function is same pathe, fist function always show in documentation
 
 
 # Create an Enum class
-<!-- 
+
         Enumerations in Python are implemented by using the module named “enum“. Enumerations are created using classes. Enums have names and values associated with them 
--->
+
 
 --------------------03-02-2024--------------
 # Query Parameters
-<!-- 
-When you declare other function parameters that are not part of the path parameters, they are automatically interpreted as "query" parameters.
- -->
 
-<!-- The query is the set of key-value pairs that go after the ? in a URL, separated by & characters. -->
+When you declare other function parameters that are not part of the path parameters, they are automatically interpreted as "query" parameters.
+ 
+
+ The query is the set of key-value pairs that go after the ? in a URL, separated by & characters.
 
 # there are 3 query parameters:
-<!-- 
+ 
        1. needy, a required str.
        2. skip, an int with a default value of 0.
        3. limit, an optional int.
--->
+
 
 # Request Body
-<!--To declare a request body, I use Pydantic models with all their power and   benefits. 
--->
+To declare a request body, I use Pydantic models with all their power and   benefits. 
 
-<!-- 
+
+
         To send data, you should use one of: POST (the more common), PUT, DELETE or PATCH.
- -->
+
 
  # First, you need to import BaseModel from pydantic
 
  # Pydantic
- <!-- Dataclasses, TypedDicts -->
+ Dataclasses, TypedDicts
 
- <!-- 
+ 
  Pydantic provides four ways to create schemas and perform validation and serialization:
 
        01. BaseModel — Pydantic's own super class with many common utilities available via instance methods.
@@ -111,33 +111,33 @@ When you declare other function parameters that are not part of the path paramet
        03. TypeAdapter — a general way to adapt any type for validation and serialization. This allows types like TypedDict and NampedTuple to be validated as well as simple scalar values like int or timedelta — all types supported can be used with TypeAdapter.
 
        04. validate_call — a decorator to perform validation when calling a function. 
-        -->
+     
         
-<!-- FastAPI will know that the value of q is not required because of the default  value = None.
- -->
+ FastAPI will know that the value of q is not required because of the default  value = None.
+
 
  # Query Parameters and String Validations
-<!-- Import Query and Annotated
+ Import Query and Annotated
        1. Query from fastapi
        2. Annotated from typing (or from typing_extensions in Python below 3.9)
- -->
- 
-<!-- 
+
+
+
 This specific regular expression pattern checks that the received parameter value:
         1. ^: starts with the following characters, doesn't have characters before.
         2. fixedquery: has the exact value fixedquery.
         3. $: ends there, doesn't have any more characters after fixedquery.
- -->
 
- <!--
+
+
         FastAPI will now:
 
         1. Validate the data making sure that the max length is 50 characters
         2. Show a clear error for the client when the data is not valid
         3. Document the parameter in the OpenAPI schema path operation (so it will show up in the automatic docs UI) 
-  -->
+  
 
-  <!--
+
         Generic validations and metadata:
                 1. alias
                 2. title
@@ -148,4 +148,3 @@ This specific regular expression pattern checks that the received parameter valu
                 2. max_length
                 3. pattern
 
-   -->
