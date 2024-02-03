@@ -73,4 +73,17 @@ install ---> python3 -m venv venv
         Enumerations in Python are implemented by using the module named “enum“. Enumerations are created using classes. Enums have names and values associated with them 
 -->
 
+--------------------03-02-2024--------------
+# Query Parameters
+<!-- 
+When you declare other function parameters that are not part of the path parameters, they are automatically interpreted as "query" parameters.
+ -->
 
+<!-- The query is the set of key-value pairs that go after the ? in a URL, separated by & characters. -->
+
+# there are 3 query parameters:
+<!-- 
+       1. needy, a required str.
+       2. skip, an int with a default value of 0.
+       3. limit, an optional int.
+-->

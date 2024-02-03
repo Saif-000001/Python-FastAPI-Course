@@ -61,5 +61,18 @@ def get_hello():
 # Predefined values
 
 
+# Query Parameters
+# http://127.0.0.1:8000/items/
+# http://127.0.0.1:8000/items/?skip=0&limit=10
 
+""" fake_db = [{'iteam_name': 'keyboard'}, {'iteam_name':'mouse'}, {'iteam_name':'monitor'}]
+@app.get('/items')
+def check_quaryParameters(skip: int = 0, limit: int= 10):
+    return fake_db[skip: skip+limit] """
 
+# Required query parameters
+# http://127.0.0.1:8000/items/mouse?price=500
+@app.get('/items/{items_id}')
+def requiredQueryParameters(items_id : str, price : int):
+    items = {'items_id': items_id, 'price': price}
+    return items
