@@ -181,3 +181,25 @@ def read_item(
     if q:
         result.update({"q":q})
     return result """
+
+""" # Multiple Parameters
+from typing import Annotated, Union
+from fastapi import FastAPI, Body
+from pydantic import BaseModel
+
+class Item(BaseModel):
+    name:str
+    description:Union[str, None] = None
+    price: float
+    tax: Union[float, None] = None
+
+class User(BaseModel):
+    userName: str
+    fullName: Union[str, None] = None
+
+app = FastAPI()
+
+@app.put("\items\{item_id}")
+def update_item(item_id:int, item:Item, user:User, importance: Annotated[int, Body()]):
+    results = {"item_id":item_id, "item":item, "user":user, "importance":importance}
+    return results """

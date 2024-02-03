@@ -156,3 +156,5 @@ With Query, Path (and others you haven't seen yet) you can declare metadata and 
                 2. ge: greater than or equal
                 3. lt: less than
                 4. le: less than or equal
+# Body - Fields
+Field is imported directly from pydantic, not from fastapi as are all the rest (Query, Path, Body, etc).
