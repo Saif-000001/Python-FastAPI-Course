@@ -182,7 +182,8 @@ def read_item(
         result.update({"q":q})
     return result """
 
-""" # Multiple Parameters
+# Multiple Parameters
+""" 
 from typing import Annotated, Union
 from fastapi import FastAPI, Body
 from pydantic import BaseModel
@@ -203,3 +204,90 @@ app = FastAPI()
 def update_item(item_id:int, item:Item, user:User, importance: Annotated[int, Body()]):
     results = {"item_id":item_id, "item":item, "user":user, "importance":importance}
     return results """
+
+# Body - Fields
+""" from typing import Annotated, Union
+from fastapi import FastAPI, Body
+from pydantic import BaseModel, Field
+
+app = FastAPI()
+
+class Item(BaseModel):
+    name:str
+    description: Union[str, None] = Field(
+        default=None, title="The description of the item", max_length=300
+    )
+
+    price : float = Field(gt=0, description="The price must be greater than zero")
+    tax: Union[float, None] = None
+
+@app.put("/items/{item_id}")
+def update_item(item_id:int, item:Annotated[Item, Body(embed=True)]):
+    result = {"item_id":item_id, "item": item}
+    return result
+ """
+
+
+# Body - Nested Models
+""" from typing import Union, List
+from fastapi import FastAPI
+from pydantic import BaseModel, HttpUrl
+
+class Image(BaseModel):
+    url:HttpUrl
+    name:str
+
+class Item(BaseModel):
+    name: str
+    description:Union[str, None] = None
+    price: float
+    tax:Union[str, None]=None
+    tags: Union[List[Image], None] = None
+
+class Offer(BaseModel):
+    name: str
+    description: Union[str, None] = None
+    items: List[Item]
+
+app = FastAPI()
+
+# @app.put("/items/{item_id}")
+# def update_item(item_id:int, item:Item):
+#     results = {"item_id":item_id, "item":item}
+#     return results
+
+@app.post("/offers/")
+def create_offer(offer:Offer):
+    return offer
+ """
+
+# Extra Data Types
+
+from datetime import datetime, time, timedelta
+from typing import Annotated, Union
+from uuid import UUID
+
+from fastapi import FastAPI, Body
+
+app = FastAPI()
+
+@app.put("/items/{item_id}")
+def update_item(
+    item_id : int,
+    start_datetime:Annotated[Union[datetime,None], Body()] = None,
+    end_datetime: Annotated[Union[datetime, None], Body()] = None,
+    reapet_at: Annotated[Union[time,None],Body()] = None,
+    proces_after:Annotated[Union[timedelta, None], Body()] = None
+):
+    start_proces = start_datetime + proces_after
+    duration = end_datetime - start_proces
+
+    return{
+        "item id": item_id,
+        "start datetime": start_datetime,
+        "end datetime": end_datetime,
+        "reapet at":reapet_at,
+        "proces after":proces_after,
+        "start proces": start_proces,
+        "duration": duration,
+    }
