@@ -292,3 +292,127 @@ def update_item(
         "duration": duration,
     }
  """
+
+# Response Model - Return Type
+
+""" # from typing import Any
+# from fastapi import FastAPI
+# from pydantic import BaseModel, EmailStr
+
+# class UserIN(BaseModel):
+#     userName: str
+#     password: str
+#     email: EmailStr
+#     fullName: str | None = None
+
+# class UserOUT(BaseModel):
+#     userName: str
+#     email: EmailStr
+#     fullName: str | None = None
+
+# app = FastAPI()
+
+# @app.post("/user/", response_model=UserOUT)
+# def create_user(user:UserIN)->Any:
+#     return user
+
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+
+
+class Item(BaseModel):
+    name: str
+    description: str | None = None
+    price: float
+    tax: float = 10.5
+
+
+items = {
+    "foo": {"name": "Foo", "price": 50.2},
+    "bar": {"name": "Bar", "description": "The Bar fighters", "price": 62, "tax": 20.2},
+    "baz": {
+        "name": "Baz",
+        "description": "There goes my baz",
+        "price": 50.2,
+        "tax": 10.5,
+    },
+}
+
+
+@app.get(
+    "/items/{item_id}/name",
+    response_model=Item
+)
+def read_item_name(item_id: str):
+    return items[item_id]
+
+
+@app.get("/items/{item_id}/public", response_model=Item, response_model_exclude=["tax"])
+def read_item_public_data(item_id: str):
+    return items[item_id]
+
+ """
+
+# Extra Models
+""" from fastapi import FastAPI
+from pydantic import BaseModel
+
+class Item(BaseModel):
+    name:str
+    description: str
+
+app = FastAPI()
+
+items = [
+    {"name": "Foo", "description": "There comes my hero"},
+    {"name": "Red", "description": "It's my aeroplane"},
+]
+
+@app.get('/items/', response_model=list[Item])
+def read():
+    return items """
+
+# Response Status Code
+# from typing import Union, Annotated
+# from fastapi import FastAPI, status , Form
+# from pydantic import BaseModel
+
+# class User(BaseModel):
+#     name: str
+#     age : int
+#     institute: Union[str, None] = None
+
+# app = FastAPI()
+
+# # @app.post("/users/{user_id}", status_code=status.HTTP_201_CREATED)
+# # def create_user(user_id:int, user : User):
+# #     result = {"user id": user_id, "user": user}
+# #     return result
+
+# @app.post("/login/", status_code=status.HTTP_201_CREATED)
+# def login(userName: Annotated[str, Form()], password: Annotated[int, Form()]):
+#     return {"userName" : userName}
+
+
+# Request Files
+
+""" 
+from typing import Annotated
+
+from fastapi import FastAPI, File, UploadFile
+
+app = FastAPI()
+
+
+@app.post("/files/")
+async def create_file(file: Annotated[bytes, File()]):
+    return {"file_size": len(file)}
+
+
+@app.post("/uploadfile/")
+async def create_upload_file(file: UploadFile):
+    return {"filename": file} 
+"""
+

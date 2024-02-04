@@ -160,3 +160,13 @@ With Query, Path (and others you haven't seen yet) you can declare metadata and 
 Field is imported directly from pydantic, not from fastapi as are all the rest (Query, Path, Body, etc).
 
 # Extra Data Types
+
+# Notes
+             
+                description: Union[str, None] = None (or str | None = None in Python 3.10) has a default of None.
+                tax: float = 10.5 has a default of 10.5.
+                tags: List[str] = [] as a default of an empty list: [].
+
+# Response Status Code
+  
+                post - > 2001
